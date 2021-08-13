@@ -1,0 +1,13 @@
+**Log on to codeastro.com for more projects!**
+
+**Developed by Tossen 250**
+
+**Instructions**
+- Install the Requirements: pip install -r requirements.txt
+(if some modules fails to get installed,
+try installing that particular module without version)
+- Then, make database migrations: python manage.py makemigrations
+- python manage.py migrate
+- And finally, run the application: python manage.py runserver
+
+For Admin Account, please create one with superuser!

@@ -1,0 +1,237 @@
+
+{% extends '_layout.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+  {% block stylesheet %}
+     .sec-box{
+     height:160px;
+     max-width:100%;
+     line-height:160px;
+     text-align:center;
+     position:relative;
+     
+     font-size:1.9rem;
+
+    -webkit-box-shadow: 0 2px 2px 0 rgba(12,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0 25px 0 rgba(20, 27, 201, .05);
+    transition: all 400ms ease-in;
+    cursor: pointer
+    font-variant: petite-caps;
+    background-image: linear-gradient(-45deg, #27b88d 0%, #22dd73 100%)
+
+ }
+
+.sec-box a{
+ color:#fff;
+ text-decoration:none;
+	
+}
+
+
+ .employee-box{
+    background: #008000;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #d04247, #5a4747);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #d04247, #5a4747); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(-45deg, #27b88d 0%, #22dd73 100%)
+    
+}
+
+
+ .leave-box{
+    background: #008000;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #d04247, #5a4747);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #d04247, #5a4747); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(-45deg, #27b88d 0%, #22dd73 100%)
+
+}
+
+.leave-box a{
+	color:white !important;
+}
+
+
+ .birthday-box{
+ 	background:#8664ad;
+}
+
+.company-box{
+	background:#868686;
+}
+
+
+
+
+.count-object {
+    position: absolute;
+    top: 40%;
+    right: 12px;
+    font-size: 29px;
+    font-weight: 100;
+    font-variant: petite-caps;
+    color: #f5f5f5;
+    text-shadow:1px 1px rgba(8, 8, 8, 0.23);
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:not(.btn):hover, .navbar-default .navbar-nav > .active > a:not(.btn):focus, .navbar-default .navbar-nav > li > a:not(.btn):hover, .navbar-default .navbar-nav > li > a:not(.btn):focus {  background-image: linear-gradient(-45deg, #27b88d 0%, #22dd73 100%)
+}
+
+.navbar-default .navbar-nav > .dropdown > a:hover .caret, .navbar-default .navbar-nav > .dropdown > a:focus .caret { background-image: linear-gradient(-45deg, #27b88d 0%, #22dd73 100% border-bottom-color:  #d04247; border-top-color:  #d04247; }
+     
+  {% endblock %}
+
+  
+
+ <!--CONTENTS-->
+ {% block content %}
+        <section class="content">
+            <section class="container-fluid">
+            	<section class="row">
+            		{% if request.user.is_superuser and request.user.is_staff %}
+            		<section class="col col-lg-4">
+            			<div class="employee-box sec-box">
+            				<a href="{% url 'dashboard:employees' %}">
+            				<span style="font-size: 20px;">Registered Employees:  {{ employees.count }}</span>
+            				</a>
+            				<!-- <span class="count-object"></span>  -->
+            			</div>
+            		</section>
+                    <section class="col col-lg-4">
+                        <div class="fmelae-box sec-box">
+                            <a href="">
+                            <span style="font-size: 24px;"></span>Male: {{ male_employees.count }}</span>
+                            </a>
+                            <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                        </div>
+                    </section>
+                <section class="col col-lg-4">
+                    <div class="fmelae-box sec-box">
+                        <a href="">
+                        <span style="font-size: 20px;">Female: {{ female_employees.count }}</span>
+                        </a>
+                        <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                    </div>
+                </section>
+                    </section>
+                    <br><br />
+                    <section class="row">
+                        <section class="col col-lg-4">
+                            <div class="fmelae-box sec-box">
+                                <a href="{% url 'dashboard:leavesrejected' %}">
+                                <span style="font-size: 24px;"></span>Rejected Leave: {{ rejected.count }}</span>
+                                </a>
+                                <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                            </div>
+                        </section>
+                        <section class="col col-lg-4">
+                            <div class="leave-box sec-box">
+                                <a href="{% url 'dashboard:leaveslist' %}">
+                                <span style="font-size: 20px;">Pending Leaves: {{ leaves.count }}</span>
+                                </a>
+                                <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                            </div>
+                        </section>
+                        <section class="col col-lg-4">
+                            <div class="male-box sec-box">
+                                <a href="{% url 'dashboard:approvedleaveslist' %}">
+                                <span style="font-size: 20px;">Approved Leave: {{ approved.count }}</span>
+                                <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                            </div>
+                        </section>
+                        
+                    </section>
+                    <br><br />
+                    <section class="row">
+                    {% for project in projects %}
+                    <section class="col col-lg-4">
+                        <div class="fmelae-box sec-box">
+                            <a href="">
+                                <span style="font-size: 20px;">Project: {{ project.name }}</span>
+                            </a>
+                        </div>
+                    </section>
+                    {% endfor %}
+                    </section>
+            		{% else %}
+                    <section class="row">
+                    <section class="col col-lg-4">
+                        <div class="leave-box sec-box">
+                            <a href="">
+                            <span>Total Leaves: {{ staff_leaves.count }}</span>
+                            </a>
+                            <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                        </div>
+                    </section>
+                    <section class="col col-lg-4">
+                        <div class="leave-box sec-box">
+                            <a href="">
+                            <span>Total Leave Days: {{ employee.get_total_day }}
+                            <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                        </div>
+                    </section>
+                    <section class="col col-lg-4">
+                        <div class="leave-box sec-box">
+                            <a href="">
+                            <span>Used Days: {{ approved_leave }}</span>
+                            </a>
+                            <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                        </div>
+                    </section>
+                    </section>
+                    <br><br>
+                    <section class="row">
+                        <section class="col col-lg-4">
+                            <div class="leave-box sec-box">
+                                <a href="">
+                                <span>Remaining Days: {{ remaining_days}}
+                                </span>
+                                </a>
+                                <!-- <span class="count-object" style="color:#41b6d6;"></span>  -->
+                            </div>
+                        </section>
+                    </section>
+                    
+                    {% endif %}
+
+                    
+
+                </section>
+                
+                
+
+                
+
+
+            </section> <!-- /container --> 
+                     
+        </section>
+
+        
+ {% endblock %}
+
+ 
+
+
+{% block extrajs%}
+    
+    
+
+    $(document).ready(function(){
+          var get_login_user = '{{request.user.username}}'
+          
+          console.log(get_login_user);
+
+          demo.initChartist();
+
+          $.notify({
+              icon: 'fa fa-user',
+              message: "Welcome to LMS Django, " +get_login_user
+
+            },{
+                type: 'danger',
+                timer: 4000
+            });
+
+      });
+
+{% endblock %}
