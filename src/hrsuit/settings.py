@@ -12,15 +12,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'This Is Secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mrmapp.herokuapp.com']
 
 
 # Email Settings
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'edward.mike.anaryo@gmail.com' #test
-EMAIL_HOST_PASSWORD = 'yencommerce'#test
+EMAIL_HOST_USER = 'munthar6@gmail.com' 
+EMAIL_HOST_PASSWORD = 'tossen2016'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
